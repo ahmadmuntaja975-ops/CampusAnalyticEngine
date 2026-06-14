@@ -323,7 +323,41 @@ int main()
                         
                             else if(courseChoice == 4)
                             {
-                                cout << "\nDelete Course Coming Soon...\n";
+                                string searchCode;
+                                string code, name;
+                                int creditHours;
+                            
+                                cout << "\nEnter Course Code to Delete: ";
+                                cin >> searchCode;
+                            
+                                ifstream file("courses.txt");
+                                ofstream temp("temp.txt");
+                            
+                                bool found = false;
+                            
+                                while(file >> code >> name >> creditHours)
+                                {
+                                    if(code == searchCode)
+                                    {
+                                        found = true;
+                                        continue;
+                                    }
+                            
+                                    temp << code << " "
+                                         << name << " "
+                                         << creditHours << endl;
+                                }
+                            
+                                file.close();
+                                temp.close();
+                            
+                                remove("courses.txt");
+                                rename("temp.txt", "courses.txt");
+                            
+                                if(found)
+                                    cout << "\nCourse Deleted Successfully!\n";
+                                else
+                                    cout << "\nCourse Not Found!\n";
                             }
                         
                             break;
