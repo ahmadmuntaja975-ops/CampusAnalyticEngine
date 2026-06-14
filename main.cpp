@@ -70,23 +70,175 @@ int main()
                 }
                 else if(studentChoice == 2)
                 {
-                    cout << "\nSearch Student Option Selected\n";
+                        string searchRoll;
+                        string roll, name, department, status;
+                         float cgpa;
+
+                        cout << "\nEnter Roll Number to Search: ";
+                         cin >> searchRoll;
+
+                        ifstream file("students.txt");
+
+                        bool found = false;
+
+                         while(file >> roll)
+                     {
+                        if(roll == searchRoll)
+                        {
+                            found = true;
+
+                            cout << "\nStudent Found!\n";
+                            cout << "Roll Number: " << roll << endl;
+                            break;
+                            }
+                        }
+
+                            file.close();
+                        
+                            if(!found)
+                            {
+                                cout << "\nStudent Not Found!\n";
+                            }
                 }
                 else if(studentChoice == 3)
                 {
-                    cout << "\nUpdate Student Option Selected\n";
+                   string searchRoll;
+                    string roll, name, department;
+                    float cgpa;
+                
+                    cout << "\nEnter Roll Number to Update: ";
+                    cin >> searchRoll;
+                
+                    ifstream file("students.txt");
+                    ofstream temp("temp.txt");
+                
+                    bool found = false;
+                
+                    while(file >> roll >> name >> department >> cgpa)
+                    {
+                        if(roll == searchRoll)
+                        {
+                            found = true;
+                
+                            cout << "\nEnter New Name: ";
+                            cin >> name;
+                
+                            cout << "Enter New Department: ";
+                            cin >> department;
+                
+                            cout << "Enter New CGPA: ";
+                            cin >> cgpa;
+                
+                            temp << roll << " "
+                                 << name << " "
+                                 << department << " "
+                                 << cgpa << endl;
+                        }
+                        else
+                        {
+                            temp << roll << " "
+                                 << name << " "
+                                 << department << " "
+                                 << cgpa << endl;
+                        }
+                    }
+                
+                    file.close();
+                    temp.close();
+                
+                    remove("students.txt");
+                    rename("temp.txt", "students.txt");
+                
+                    if(found)
+                        cout << "\nStudent Updated Successfully!\n";
+                    else
+                        cout << "\nStudent Not Found!\n";
                 }
                 else if(studentChoice == 4)
                 {
-                    cout << "\nDelete Student Option Selected\n";
-                }
-
-                break;
+                    string searchRoll;
+                    string roll, name, department;
+                    float cgpa;
+                
+                    cout << "\nEnter Roll Number to Delete: ";
+                    cin >> searchRoll;
+                
+                    ifstream file("students.txt");
+                    ofstream temp("temp.txt");
+                
+                    bool found = false;
+                
+                    while(file >> roll >> name >> department >> cgpa)
+                    {
+                        if(roll == searchRoll)
+                        {
+                            found = true;
+                            continue;
+                        }
+                
+                        temp << roll << " "
+                             << name << " "
+                             << department << " "
+                             << cgpa << endl;
+                    }
+                
+                    file.close();
+                    temp.close();
+                
+                    remove("students.txt");
+                    rename("temp.txt", "students.txt");
+                
+                    if(found)
+                        cout << "\nStudent Deleted Successfully!\n";
+                    else
+                        cout << "\nStudent Not Found!\n";
+                                }
+                
+                                break;
             }
 
-            case 2:
-                cout << "\nCourse Management Selected\n";
-                break;
+             case 2:
+                    {
+                        int courseChoice;
+                    
+                        cout << "\n===== COURSE MANAGEMENT =====\n";
+                        cout << "1. Add Course\n";
+                        cout << "2. Search Course\n";
+                        cout << "3. Update Course\n";
+                        cout << "4. Delete Course\n";
+                        cout << "0. Back\n";
+                    
+                        cout << "Enter Choice: ";
+                        cin >> courseChoice;
+                    
+                        if(courseChoice == 1)
+                        {
+                            string code, name;
+                            int creditHours;
+                    
+                            cout << "\nEnter Course Code: ";
+                            cin >> code;
+                    
+                            cout << "Enter Course Name: ";
+                            cin >> name;
+                    
+                            cout << "Enter Credit Hours: ";
+                            cin >> creditHours;
+                    
+                            ofstream file("courses.txt", ios::app);
+                    
+                            file << code << " "
+                                 << name << " "
+                                 << creditHours << endl;
+                    
+                            file.close();
+                    
+                            cout << "\nCourse Added Successfully!\n";
+                        }
+                    
+                        break;
+                    }
+               
 
             case 3:
                 cout << "\nAttendance Selected\n";
