@@ -238,7 +238,7 @@ int main()
                         
                             else if(courseChoice == 2)
                             {
-                                 string searchCode;
+                                    string searchCode;
                                     string code, name;
                                     int creditHours;
                                     bool found = false;
@@ -272,8 +272,53 @@ int main()
                             }
                         
                             else if(courseChoice == 3)
-                            {
-                                cout << "\nUpdate Course Coming Soon...\n";
+                            { 
+                                string searchCode;
+                                string code, name;
+                                int creditHours;
+                            
+                                cout << "\nEnter Course Code to Update: ";
+                                cin >> searchCode;
+                            
+                                ifstream file("courses.txt");
+                                ofstream temp("temp.txt");
+                            
+                                bool found = false;
+                            
+                                while(file >> code >> name >> creditHours)
+                                {
+                                    if(code == searchCode)
+                                    {
+                                        found = true;
+                            
+                                        cout << "\nEnter New Course Name: ";
+                                        cin >> name;
+                            
+                                        cout << "Enter New Credit Hours: ";
+                                        cin >> creditHours;
+                            
+                                        temp << code << " "
+                                             << name << " "
+                                             << creditHours << endl;
+                                    }
+                                    else
+                                    {
+                                        temp << code << " "
+                                             << name << " "
+                                             << creditHours << endl;
+                                    }
+                                }
+                            
+                                file.close();
+                                temp.close();
+                            
+                                remove("courses.txt");
+                                rename("temp.txt", "courses.txt");
+                            
+                                if(found)
+                                    cout << "\nCourse Updated Successfully!\n";
+                                else
+                                    cout << "\nCourse Not Found!\n";
                             }
                         
                             else if(courseChoice == 4)
