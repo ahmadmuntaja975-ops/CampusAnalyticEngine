@@ -199,44 +199,89 @@ int main()
 
              case 2:
                     {
-                        int courseChoice;
-                    
-                        cout << "\n===== COURSE MANAGEMENT =====\n";
-                        cout << "1. Add Course\n";
-                        cout << "2. Search Course\n";
-                        cout << "3. Update Course\n";
-                        cout << "4. Delete Course\n";
-                        cout << "0. Back\n";
-                    
-                        cout << "Enter Choice: ";
-                        cin >> courseChoice;
-                    
-                        if(courseChoice == 1)
-                        {
-                            string code, name;
-                            int creditHours;
-                    
-                            cout << "\nEnter Course Code: ";
-                            cin >> code;
-                    
-                            cout << "Enter Course Name: ";
-                            cin >> name;
-                    
-                            cout << "Enter Credit Hours: ";
-                            cin >> creditHours;
-                    
-                            ofstream file("courses.txt", ios::app);
-                    
-                            file << code << " "
-                                 << name << " "
-                                 << creditHours << endl;
-                    
-                            file.close();
-                    
-                            cout << "\nCourse Added Successfully!\n";
-                        }
-                    
-                        break;
+                       int courseChoice;
+                        
+                            cout << "\n===== COURSE MANAGEMENT =====\n";
+                            cout << "1. Add Course\n";
+                            cout << "2. Search Course\n";
+                            cout << "3. Update Course\n";
+                            cout << "4. Delete Course\n";
+                            cout << "0. Back\n";
+                        
+                            cout << "Enter Choice: ";
+                            cin >> courseChoice;
+                        
+                            if(courseChoice == 1)
+                            {
+                                string code, name;
+                                int creditHours;
+                        
+                                cout << "\nEnter Course Code: ";
+                                cin >> code;
+                        
+                                cout << "Enter Course Name: ";
+                                cin >> name;
+                        
+                                cout << "Enter Credit Hours: ";
+                                cin >> creditHours;
+                        
+                                ofstream file("courses.txt", ios::app);
+                        
+                                file << code << " "
+                                     << name << " "
+                                     << creditHours << endl;
+                        
+                                file.close();
+                        
+                                cout << "\nCourse Added Successfully!\n";
+                            }
+                        
+                            else if(courseChoice == 2)
+                            {
+                                 string searchCode;
+                                    string code, name;
+                                    int creditHours;
+                                    bool found = false;
+                                
+                                    cout << "\nEnter Course Code to Search: ";
+                                    cin >> searchCode;
+                                
+                                    ifstream file("courses.txt");
+                                
+                                    while(file >> code >> name >> creditHours)
+                                    {
+                                        if(code == searchCode)
+                                        {
+                                            found = true;
+                                
+                                            cout << "\n===== COURSE FOUND =====\n";
+                                            cout << "Course Code : " << code << endl;
+                                            cout << "Course Name : " << name << endl;
+                                            cout << "Credit Hours: " << creditHours << endl;
+                                
+                                            break;
+                                        }
+                                    }
+                                
+                                    file.close();
+                                
+                                    if(!found)
+                                    {
+                                        cout << "\nCourse Not Found!\n";
+                                    }
+                            }
+                        
+                            else if(courseChoice == 3)
+                            {
+                                cout << "\nUpdate Course Coming Soon...\n";
+                            }
+                        
+                            else if(courseChoice == 4)
+                            {
+                                cout << "\nDelete Course Coming Soon...\n";
+                            }
+                        
+                            break;
                     }
                
 
